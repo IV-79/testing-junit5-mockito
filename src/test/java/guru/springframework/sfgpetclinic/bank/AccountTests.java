@@ -75,4 +75,20 @@ public class AccountTests {
                 transactions.get(1).balance());
     }
 
+    @Test
+    void shouldPrintStatement() {
+
+        Account account = new Account();
+
+        account.deposit(100);
+        account.withdraw(40);
+
+        String statement = account.printStatement();
+
+        assertNotNull(statement);
+
+        assertTrue(statement.contains("100"));
+        assertTrue(statement.contains("-40"));
+        assertTrue(statement.contains("60"));
+    }
 }
