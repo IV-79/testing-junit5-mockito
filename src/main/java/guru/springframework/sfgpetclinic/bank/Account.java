@@ -42,12 +42,20 @@ public class Account {
     public String printStatement() {
         StringBuilder statement = new StringBuilder("DATE | AMOUNT | BALANCE\n");
         for(Transaction transaction : transactions) {
-            statement.append(transaction.date.toString())
+            statement.append(transaction.date())
                     .append(" | ")
-                    .append(transaction.amount).append(" | ")
-                    .append(transaction.balance).append("\n");
+                    .append(transaction.amount()).append(" | ")
+                    .append(transaction.balance()).append("\n");
         }
 
         return statement.toString();
+    }
+
+    public int totalDeposits(){
+        return transactions.stream().filter(t -> t.amount>0).mapToInt(t -> t.amount).sum();
+    }
+
+    public  int totalWithdrawals(){
+        return transactions.stream().filter(t -> t.amount<0).mapToInt(t -> t.amount).sum();
     }
 }
