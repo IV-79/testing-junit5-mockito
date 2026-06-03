@@ -2,8 +2,9 @@ package guru.springframework.sfgpetclinic.bank;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTests {
     @Test
@@ -47,4 +48,31 @@ public class AccountTests {
                 () -> account.withdraw(150)
         );
     }
+
+    @Test
+    void shouldStoreTransactions() {
+
+        Account account = new Account();
+
+        account.deposit(100);
+        account.withdraw(40);
+
+        List<Account.Transaction> transactions =
+                account.getTransactions();
+
+        assertEquals(2, transactions.size());
+
+        assertEquals(100,
+                transactions.get(0).amount());
+
+        assertEquals(100,
+                transactions.get(0).balance());
+
+        assertEquals(-40,
+                transactions.get(1).amount());
+
+        assertEquals(60,
+                transactions.get(1).balance());
+    }
+
 }
