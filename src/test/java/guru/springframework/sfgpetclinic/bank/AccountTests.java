@@ -91,4 +91,28 @@ public class AccountTests {
         assertTrue(statement.contains("-40"));
         assertTrue(statement.contains("60"));
     }
+
+    @Test
+    void shouldCalculateTotalDeposits() {
+
+        Account account = new Account();
+
+        account.deposit(100);
+        account.deposit(50);
+        account.withdraw(20);
+
+        assertEquals(150, account.totalDeposits());
+    }
+
+    @Test
+    void shouldCalculateTotalWithdrawals() {
+
+        Account account = new Account();
+
+        account.deposit(100);
+        account.withdraw(20);
+        account.withdraw(30);
+
+        assertEquals(50, account.totalWithdrawals());
+    }
 }
