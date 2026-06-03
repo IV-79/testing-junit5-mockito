@@ -38,4 +38,16 @@ public class Account {
     public List<Transaction> getTransactions() {
         return transactions;
     }
+
+    public String printStatement() {
+        StringBuilder statement = new StringBuilder("DATE | AMOUNT | BALANCE\n");
+        for(Transaction transaction : transactions) {
+            statement.append(transaction.date.toString())
+                    .append(" | ")
+                    .append(transaction.amount).append(" | ")
+                    .append(transaction.balance).append("\n");
+        }
+
+        return statement.toString();
+    }
 }
