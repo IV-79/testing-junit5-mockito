@@ -3,6 +3,7 @@ package guru.springframework.sfgpetclinic.bank;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AccountTests {
     @Test
@@ -22,5 +23,28 @@ public class AccountTests {
         account.deposit(50);
 
         assertEquals(150, account.getBalance());
+    }
+
+    @Test
+    void shouldWithdrawMoney() {
+        Account account = new Account();
+
+        account.deposit(100);
+
+        account.withdraw(40);
+
+        assertEquals(60, account.getBalance());
+    }
+
+    @Test
+    void shouldNotAllowWithdrawalAboveBalance() {
+        Account account = new Account();
+
+        account.deposit(100);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> account.withdraw(150)
+        );
     }
 }
